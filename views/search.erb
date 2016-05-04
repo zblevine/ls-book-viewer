@@ -1,0 +1,18 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+
+<% if @paragraphs %>
+  <h2 class="content-subhead">Results for '<%= params[:query]%>'</h2>
+  <ul>
+    <% @paragraphs.each do |arr| %>
+      <li>
+        <a href="<%= "/chapters/#{arr[0]}##{arr[1]}" %>"><%= @contents[arr[0] - 1] %></a>
+        <p><%= highlight(arr[2], params[:query]) %></p>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
